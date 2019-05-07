@@ -3,6 +3,7 @@ package com.example.test.view_model;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.test.bean.Login;
 import com.example.test.bean.User;
 
 /**
@@ -10,18 +11,17 @@ import com.example.test.bean.User;
  **/
 public class UserInfoViewModel extends ViewModel {
     private String name;
+    private LiveData<Login> user;
 
-    public void setUser(LiveData<User> user) {
+    public void setUser(LiveData<Login> user) {
         this.user = user;
     }
-
-    private LiveData<User> user;
 
     public void init(String name) {
         this.name = name;
     }
 
-    public LiveData<User> getUser() {
+    public LiveData<Login> getUser() {
         return user;
     }
 }

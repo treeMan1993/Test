@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.test.R;
+import com.example.test.bean.Login;
 import com.example.test.bean.User;
 import com.example.test.view_model.UserInfoViewModel;
 
@@ -28,10 +29,10 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
         initView();
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
         userInfoViewModel.init("SunJH");
-        userInfoViewModel.getUser().observe(this, new Observer<User>() {
+        userInfoViewModel.getUser().observe(this, new Observer<Login>() {
             @Override
-            public void onChanged(User user) {
-                mTvShow.setText(String.valueOf(i));
+            public void onChanged(Login login) {
+                mTvShow.setText(String.valueOf(login.getId()));
             }
         });
     }
@@ -47,7 +48,7 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.btn_change_data:
                 i++;
-                userInfoViewModel.getUser().getValue().setName(String.valueOf(i));
+                userInfoViewModel.getUser().getValue().setId(i);
                 break;
         }
     }
