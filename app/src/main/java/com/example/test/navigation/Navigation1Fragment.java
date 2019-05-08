@@ -32,7 +32,7 @@ public class Navigation1Fragment extends Fragment  {
         tv_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.navigation2Fragment);
+                Navigation.findNavController(v).navigate(R.id.navigation2Fragment,new Bundle());
 
             }
         });

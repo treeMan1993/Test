@@ -1,8 +1,12 @@
 package com.example.test.bean;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+
 import java.util.List;
 
-public class FirstViewData {
+public class FirstViewData{
 
     /**
      * curPage : 1

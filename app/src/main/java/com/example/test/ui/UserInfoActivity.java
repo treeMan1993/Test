@@ -5,16 +5,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.test.R;
 import com.example.test.bean.Login;
-import com.example.test.bean.User;
 import com.example.test.view_model.UserInfoViewModel;
 
 public class UserInfoActivity extends FragmentActivity implements View.OnClickListener {
@@ -22,6 +18,7 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
     private Button mBtnChangeData;
     private TextView mTvShow;
     private int i = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +26,8 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
         initView();
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
         userInfoViewModel.init("SunJH");
-        userInfoViewModel.getUser().observe(this, new Observer<Login>() {
-            @Override
-            public void onChanged(Login login) {
-                mTvShow.setText(String.valueOf(login.getId()));
-            }
+        userInfoViewModel.getUser().observe(this,login->{
+            mTvShow.setText(String.valueOf(login.getId()));
         });
     }
 
