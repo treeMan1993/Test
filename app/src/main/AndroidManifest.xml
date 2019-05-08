@@ -17,6 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".easyPermission.EasyPermissionActivity">
+
+        </activity>
+        <activity android:name=".navigation.MainKtActivity"></activity>
+        <activity android:name=".navigation.NavigationMainActivity"></activity>
+        <activity android:name=".ui.UserInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,10 +29,7 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".navigation.MainKtActivity"></activity>
-        <activity android:name=".navigation.NavigationMainActivity">
-        </activity>
-        <activity android:name=".ui.UserInfoActivity" />
+
         <activity android:name=".ui.MainActivity" />
 
         <meta-data

@@ -11,7 +11,7 @@ import androidx.navigation.Navigation;
 
 import com.example.test.R;
 
-public class NavigationFragment extends Fragment {
+public class UserInfoFragment extends Fragment {
 
 
     private TextView tv_ddd;

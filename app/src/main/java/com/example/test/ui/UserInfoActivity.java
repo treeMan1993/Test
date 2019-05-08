@@ -6,12 +6,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.test.R;
+import com.example.test.bean.BaseBean;
 import com.example.test.bean.Login;
 import com.example.test.view_model.UserInfoViewModel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserInfoActivity extends FragmentActivity implements View.OnClickListener {
     private UserInfoViewModel userInfoViewModel;
@@ -25,9 +31,13 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
         setContentView(R.layout.activity_user_info);
         initView();
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
-        userInfoViewModel.init("SunJH");
+        Map<String, String> params = new HashMap<>();
+        params.put("username", "hdhdhd");
+        params.put("password", "123456");
+        userInfoViewModel.init();
+        userInfoViewModel.requestUserInfo(params);
         userInfoViewModel.getUser().observe(this,login->{
-            mTvShow.setText(String.valueOf(login.getId()));
+            mTvShow.setText(String.valueOf(login.getData().getId()));
         });
     }
 
@@ -41,8 +51,10 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_data:
-                i++;
-                userInfoViewModel.getUser().getValue().setId(i);
+                Map<String, String> params = new HashMap<>();
+                params.put("username", "hdhdhd");
+                params.put("password", "123456");
+                userInfoViewModel.requestUserInfo(params);
                 break;
         }
     }
