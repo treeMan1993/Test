@@ -11,23 +11,79 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+        flavorDimensions "versionName"
+        manifestPlaceholders = [
+                app_icon: "@mipmap/ic_launcher",
+                app_name: "@string/app_name",
+        ]
+    }
+    productFlavors {
+        china {
+            applicationId "com.example.china"
+            manifestPlaceholders = [
+                    app_icon: "@mipmap/ic_launcher",
+                    app_name: "中国版",
+            ]
+        }
+        america {
+            applicationId "com.example.america"
+            manifestPlaceholders = [
+                    app_icon: "@mipmap/ic_launcher",
+                    app_name: "美国版",
+            ]
+        }
+        free {
+            applicationId "com.lqr.demo.free1"
+            versionName "1.2.3"
+            manifestPlaceholders = [
+                    app_icon: "@mipmap/icon_no_baggage_data",
+                    app_name: "免费版",
+            ]
+
+        }
     }
     buildTypes {
+        // 多渠道相关设置
         release {
             buildConfigField("boolean", "LOG_DISPLAY ", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                buildConfigField("String", "PROUDCT", "\"newapp\"")
+                buildConfigField("String[]", "DNSS", "{\"http://119.29.29.29\",\"http://8.8.8.8\",\"http://114.114.114.114\"}")
+                if (variant.flavorName == 'china') {
+                    buildConfigField("String", "DNS", "\"http://119.29.29.29\"")
+                } else if (variant.flavorName == 'america') {
+                    buildConfigField("String", "DNS", "\"http://8.8.8.8\"")
+                } else if (variant.flavorName == 'free') {
+                    buildConfigField("String", "DNS", '"http://114.114.114.114"')
+                }
+            }
         }
         debug {
             buildConfigField("boolean", "LOG_DISPLAY ", "true")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                buildConfigField("String", "PROUDCT", "\"newapp\"")
+                buildConfigField("String[]", "DNSS", "{\"http://119.29.29.29\",\"http://8.8.8.8\",\"http://114.114.114.114\"}")
+                if (variant.flavorName == 'china') {
+                    buildConfigField("String", "DNS", "\"http://119.29.29.29\"")
+                } else if (variant.flavorName == 'america') {
+                    buildConfigField("String", "DNS", "\"http://8.8.8.8\"")
+                } else if (variant.flavorName == 'free') {
+                    buildConfigField("String", "DNS", '"http://114.114.114.117"')
+                }
+
+            }
         }
     }
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
 }
 
 dependencies {
@@ -83,4 +139,6 @@ dependencies {
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.zxing:core:3.3.2'
+    implementation 'com.google.zxing:core:3.3.2'
 }

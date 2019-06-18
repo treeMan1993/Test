@@ -14,10 +14,20 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.test.R;
 import com.example.test.bean.BaseBean;
 import com.example.test.bean.Login;
+import com.example.test.net.BaseApi;
+import com.example.test.net.IResponse;
+import com.example.test.net.NetWorkManager;
+import com.example.test.utils.LogUtil;
 import com.example.test.view_model.UserInfoViewModel;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserInfoActivity extends FragmentActivity implements View.OnClickListener {
     private UserInfoViewModel userInfoViewModel;
@@ -51,10 +61,26 @@ public class UserInfoActivity extends FragmentActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_change_data:
+               BaseApi baseApi = NetWorkManager.getInstance().newBuilder().build(BaseApi.class);
                 Map<String, String> params = new HashMap<>();
                 params.put("username", "hdhdhd");
                 params.put("password", "123456");
-                userInfoViewModel.requestUserInfo(params);
+                NetWorkManager.getInstance().doGetAsync("https://www.jianshu.com/p/4268e434150a",null, new IResponse<String>() {
+                    @Override
+                    public void success(String data) {
+                        LogUtil.e("SJH",data);
+                    }
+
+                    @Override
+                    public void failure(Throwable t) {
+
+                    }
+
+                    @Override
+                    public Type getDataType() {
+                        return String.class;
+                    }
+                });
                 break;
         }
     }

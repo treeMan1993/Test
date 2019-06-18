@@ -19,7 +19,6 @@ public class NavigationMainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_test);
-        NavHostFragment.findNavController(fragment).getCurrentDestination();
         return NavHostFragment.findNavController(fragment).navigateUp();
     }
 

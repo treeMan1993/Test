@@ -26,7 +26,6 @@ public class NetWorkManager {
     private long READ_TIME_OUT = 20_000;
     private String TAG = "NetWorkManager";
     BaseApi baseApi;
-
     private NetWorkManager() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override

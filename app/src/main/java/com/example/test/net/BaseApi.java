@@ -13,7 +13,10 @@ import retrofit2.http.Url;
 
 public interface BaseApi {
 
+    @GET("user/login")
+    Call<ResponseBody> LoginGet(@QueryMap Map<String, String> maps);
     //带参数的通用get请求
+
     @GET()
     Call<ResponseBody> executeGet(@Url String url, @QueryMap Map<String, String> maps);
 
